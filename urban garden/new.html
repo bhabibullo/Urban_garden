@@ -1,0 +1,1652 @@
+<!DOCTYPE html>
+<html lang="uz">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Yer Sotish va Investitsiya Platformasi</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Arial", sans-serif;
+        line-height: 1.6;
+        color: #333;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        min-height: 100vh;
+      }
+
+      .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 20px;
+      }
+
+      /* Header */
+      header {
+        background: rgba(255, 255, 255, 0.95);
+        backdrop-filter: blur(10px);
+        padding: 1rem 0;
+        position: fixed;
+        width: 100%;
+        top: 0;
+        z-index: 1000;
+        box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+      }
+
+      nav {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .logo {
+        font-size: 1.5rem;
+        font-weight: bold;
+        color: #667eea;
+      }
+
+      .nav-links {
+        display: flex;
+        list-style: none;
+        gap: 2rem;
+      }
+
+      .nav-links a {
+        text-decoration: none;
+        color: #333;
+        font-weight: 500;
+        transition: color 0.3s ease;
+      }
+
+      .nav-links a:hover {
+        color: #667eea;
+      }
+
+      .auth-buttons {
+        display: flex;
+        gap: 1rem;
+      }
+
+      .btn {
+        padding: 0.5rem 1.5rem;
+        border: none;
+        border-radius: 25px;
+        cursor: pointer;
+        font-weight: 500;
+        transition: all 0.3s ease;
+        text-decoration: none;
+        display: inline-block;
+        text-align: center;
+        font-size: 0.9rem;
+      }
+
+      .btn-primary {
+        background: linear-gradient(45deg, #667eea, #764ba2);
+        color: white;
+      }
+
+      .btn-primary:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+      }
+
+      .btn-outline {
+        background: transparent;
+        color: #667eea;
+        border: 2px solid #667eea;
+      }
+
+      .btn-outline:hover {
+        background: #667eea;
+        color: white;
+      }
+
+      /* Mobile Menu */
+      .mobile-menu-btn {
+        display: none;
+        background: none;
+        border: none;
+        font-size: 1.5rem;
+        cursor: pointer;
+      }
+
+      /* Hero Section */
+      .hero {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        padding: 120px 0 80px;
+        text-align: center;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .hero h1 {
+        font-size: 3.5rem;
+        margin-bottom: 1rem;
+        animation: fadeInUp 1s ease;
+      }
+
+      .hero p {
+        font-size: 1.2rem;
+        margin-bottom: 2rem;
+        opacity: 0.9;
+        animation: fadeInUp 1s ease 0.2s both;
+      }
+
+      .hero-buttons {
+        display: flex;
+        gap: 1rem;
+        justify-content: center;
+        flex-wrap: wrap;
+        animation: fadeInUp 1s ease 0.4s both;
+      }
+
+      /* Properties Section */
+      .properties {
+        padding: 80px 0;
+        background: rgba(255, 255, 255, 0.95);
+      }
+
+      .section-title {
+        text-align: center;
+        font-size: 2.5rem;
+        margin-bottom: 3rem;
+        color: #333;
+      }
+
+      .properties-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 2rem;
+        margin-top: 2rem;
+      }
+
+      .property-card {
+        background: white;
+        border-radius: 15px;
+        overflow: hidden;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        transition: all 0.3s ease;
+        cursor: pointer;
+      }
+
+      .property-card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+      }
+
+      .property-image {
+        height: 200px;
+        background: linear-gradient(45deg, #667eea, #764ba2);
+        position: relative;
+        overflow: hidden;
+      }
+
+      .property-image img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.3s ease;
+      }
+
+      .property-card:hover .property-image img {
+        transform: scale(1.1);
+      }
+
+      .property-badge {
+        position: absolute;
+        top: 15px;
+        right: 15px;
+        background: rgba(255, 255, 255, 0.9);
+        padding: 0.3rem 0.8rem;
+        border-radius: 20px;
+        font-size: 0.8rem;
+        font-weight: 500;
+      }
+
+      .property-content {
+        padding: 1.5rem;
+      }
+
+      .property-title {
+        font-size: 1.3rem;
+        font-weight: bold;
+        margin-bottom: 0.5rem;
+        color: #333;
+      }
+
+      .property-details {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+        margin-bottom: 1rem;
+      }
+
+      .property-detail {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        font-size: 0.9rem;
+        color: #666;
+      }
+
+      .property-price {
+        font-size: 1.2rem;
+        font-weight: bold;
+        color: #27ae60;
+        margin-bottom: 1rem;
+      }
+
+      .property-description {
+        color: #666;
+        font-size: 0.9rem;
+        line-height: 1.5;
+        margin-bottom: 1.5rem;
+        display: -webkit-box;
+        -webkit-line-clamp: 3;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+      }
+
+      .property-actions {
+        display: flex;
+        gap: 0.5rem;
+      }
+
+      .btn-small {
+        padding: 0.4rem 1rem;
+        font-size: 0.9rem;
+        flex: 1;
+      }
+
+      /* Modal */
+      .modal {
+        display: none;
+        position: fixed;
+        z-index: 2000;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5);
+        backdrop-filter: blur(5px);
+        overflow-y: auto;
+      }
+
+      .modal-content {
+        background-color: white;
+        margin: 2% auto;
+        padding: 2rem;
+        border-radius: 15px;
+        width: 90%;
+        max-width: 500px;
+        position: relative;
+        animation: modalSlideIn 0.3s ease;
+        max-height: 90vh;
+        overflow-y: auto;
+      }
+
+      .modal-content.large {
+        max-width: 700px;
+      }
+
+      .close {
+        position: absolute;
+        right: 1rem;
+        top: 1rem;
+        font-size: 2rem;
+        cursor: pointer;
+        color: #999;
+        z-index: 10;
+      }
+
+      .close:hover {
+        color: #333;
+      }
+
+      .modal h2 {
+        margin-bottom: 1rem;
+        color: #333;
+        padding-right: 2rem;
+      }
+
+      .form-group {
+        margin-bottom: 1rem;
+      }
+
+      .form-group label {
+        display: block;
+        margin-bottom: 0.5rem;
+        font-weight: 500;
+        color: #333;
+      }
+
+      .form-group input,
+      .form-group textarea,
+      .form-group select {
+        width: 100%;
+        padding: 0.8rem;
+        border: 2px solid #e1e1e1;
+        border-radius: 8px;
+        font-size: 1rem;
+        transition: border-color 0.3s ease;
+      }
+
+      .form-group input:focus,
+      .form-group textarea:focus,
+      .form-group select:focus {
+        outline: none;
+        border-color: #667eea;
+      }
+
+      .form-row {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 1rem;
+      }
+
+      .contact-list {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+      }
+
+      .contact-item {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        padding: 1rem;
+        background: #f8f9fa;
+        border-radius: 8px;
+        cursor: pointer;
+        transition: background 0.3s ease;
+      }
+
+      .contact-item:hover {
+        background: #e9ecef;
+      }
+
+      .contact-icon {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-weight: bold;
+      }
+
+      .contact-telegram {
+        background: #0088cc;
+      }
+      .contact-instagram {
+        background: #e4405f;
+      }
+      .contact-phone {
+        background: #27ae60;
+      }
+      .contact-email {
+        background: #3498db;
+      }
+
+      /* Add Property Form */
+      .contacts-section {
+        border: 2px dashed #e1e1e1;
+        padding: 1rem;
+        border-radius: 8px;
+        margin: 1rem 0;
+      }
+
+      .contact-input-group {
+        display: flex;
+        gap: 0.5rem;
+        margin-bottom: 0.5rem;
+        align-items: center;
+      }
+
+      .contact-input-group select {
+        flex: 0 0 120px;
+      }
+
+      .contact-input-group input {
+        flex: 1;
+      }
+
+      .remove-contact-btn {
+        background: #e74c3c;
+        color: white;
+        border: none;
+        padding: 0.5rem;
+        border-radius: 5px;
+        cursor: pointer;
+        flex: 0 0 auto;
+      }
+
+      .add-contact-btn {
+        background: #f8f9fa;
+        border: 2px dashed #667eea;
+        color: #667eea;
+        padding: 0.5rem 1rem;
+        border-radius: 8px;
+        cursor: pointer;
+        width: 100%;
+        margin-top: 0.5rem;
+      }
+
+      .add-contact-btn:hover {
+        background: #667eea;
+        color: white;
+      }
+
+      /* File Upload */
+      .file-upload {
+        position: relative;
+        display: inline-block;
+        width: 100%;
+      }
+
+      .file-upload input[type="file"] {
+        position: absolute;
+        opacity: 0;
+        width: 100%;
+        height: 100%;
+        cursor: pointer;
+      }
+
+      .file-upload-label {
+        display: block;
+        padding: 0.8rem;
+        border: 2px dashed #667eea;
+        border-radius: 8px;
+        text-align: center;
+        cursor: pointer;
+        transition: all 0.3s ease;
+      }
+
+      .file-upload-label:hover {
+        background: #f8f9fa;
+      }
+
+      .image-preview {
+        margin-top: 1rem;
+        text-align: center;
+      }
+
+      .image-preview img {
+        max-width: 100%;
+        max-height: 200px;
+        border-radius: 8px;
+      }
+
+      /* Animations */
+      @keyframes fadeInUp {
+        from {
+          opacity: 0;
+          transform: translateY(30px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      @keyframes modalSlideIn {
+        from {
+          opacity: 0;
+          transform: translateY(-50px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      /* Hidden sections */
+      .hidden {
+        display: none;
+      }
+
+      .page-section {
+        min-height: 100vh;
+        padding-top: 80px;
+      }
+
+      /* Chat styles */
+      .chat-container {
+        background: white;
+        border-radius: 15px;
+        height: 500px;
+        display: flex;
+        flex-direction: column;
+        overflow: hidden;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+      }
+
+      .chat-header {
+        background: linear-gradient(45deg, #667eea, #764ba2);
+        color: white;
+        padding: 1rem;
+        font-weight: bold;
+      }
+
+      .chat-messages {
+        flex: 1;
+        padding: 1rem;
+        overflow-y: auto;
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+      }
+
+      .message {
+        max-width: 70%;
+        padding: 0.8rem;
+        border-radius: 15px;
+        word-wrap: break-word;
+      }
+
+      .message.sent {
+        background: #667eea;
+        color: white;
+        align-self: flex-end;
+        border-bottom-right-radius: 5px;
+      }
+
+      .message.received {
+        background: #f1f3f4;
+        color: #333;
+        align-self: flex-start;
+        border-bottom-left-radius: 5px;
+      }
+
+      .chat-input {
+        display: flex;
+        padding: 1rem;
+        border-top: 1px solid #e1e1e1;
+        gap: 0.5rem;
+      }
+
+      .chat-input input {
+        flex: 1;
+        padding: 0.8rem;
+        border: 1px solid #e1e1e1;
+        border-radius: 25px;
+        outline: none;
+      }
+
+      .chat-input button {
+        padding: 0.8rem 1.5rem;
+        background: #667eea;
+        color: white;
+        border: none;
+        border-radius: 25px;
+        cursor: pointer;
+      }
+
+      /* Alert */
+      .alert {
+        position: fixed;
+        top: 100px;
+        right: 20px;
+        padding: 1rem 1.5rem;
+        border-radius: 8px;
+        color: white;
+        font-weight: 500;
+        z-index: 3000;
+        animation: slideInRight 0.3s ease;
+      }
+
+      .alert.success {
+        background: #27ae60;
+      }
+
+      .alert.error {
+        background: #e74c3c;
+      }
+
+      @keyframes slideInRight {
+        from {
+          transform: translateX(100%);
+          opacity: 0;
+        }
+        to {
+          transform: translateX(0);
+          opacity: 1;
+        }
+      }
+
+      /* Responsive */
+      @media (max-width: 768px) {
+        .nav-links {
+          display: none;
+        }
+
+        .mobile-menu-btn {
+          display: block;
+        }
+
+        .hero h1 {
+          font-size: 2.5rem;
+        }
+
+        .hero p {
+          font-size: 1rem;
+        }
+
+        .hero-buttons {
+          flex-direction: column;
+          align-items: center;
+        }
+
+        .properties-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .modal-content {
+          margin: 5% auto;
+          width: 95%;
+          padding: 1.5rem;
+        }
+
+        .form-row {
+          grid-template-columns: 1fr;
+        }
+
+        .contact-input-group {
+          flex-direction: column;
+          gap: 0.5rem;
+        }
+
+        .contact-input-group select {
+          flex: 1;
+        }
+
+        .property-actions {
+          flex-direction: column;
+        }
+
+        .section-title {
+          font-size: 2rem;
+        }
+
+        .chat-container {
+          height: 400px;
+        }
+
+        .message {
+          max-width: 85%;
+        }
+      }
+
+      @media (max-width: 480px) {
+        .container {
+          padding: 0 15px;
+        }
+
+        .hero {
+          padding: 100px 0 60px;
+        }
+
+        .hero h1 {
+          font-size: 2rem;
+        }
+
+        .properties {
+          padding: 60px 0;
+        }
+
+        .modal-content {
+          padding: 1rem;
+        }
+
+        .btn {
+          padding: 0.6rem 1.2rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Header -->
+    <header>
+      <nav class="container">
+        <div class="logo">YerSotish.uz</div>
+        <ul class="nav-links">
+          <li><a href="#" onclick="showSection('home')">Bosh sahifa</a></li>
+          <li><a href="#" onclick="showSection('properties')">Yerlar</a></li>
+          <li>
+            <a href="#" onclick="showSection('investors')">Investorlar</a>
+          </li>
+          <li><a href="#" onclick="showSection('chat')">Chat</a></li>
+        </ul>
+        <button class="mobile-menu-btn" onclick="toggleMobileMenu()">☰</button>
+        <div class="auth-buttons" id="authButtons">
+          <a href="#" class="btn btn-outline" onclick="showModal('loginModal')"
+            >Kirish</a
+          >
+          <a
+            href="#"
+            class="btn btn-primary"
+            onclick="showModal('registerModal')"
+            >Ro'yxatdan o'tish</a
+          >
+        </div>
+      </nav>
+    </header>
+
+    <!-- Home Section -->
+    <section id="home" class="page-section">
+      <!-- Hero -->
+      <div class="hero">
+        <div class="container">
+          <div class="hero-content">
+            <h1>Yer Sotish va Investitsiya Platformasi</h1>
+            <p>
+              Eng yaxshi yerlarni toping yoki o'z yeringizni soting. Investorlar
+              bilan bevosita bog'laning va foydali bitimlar tuzing.
+            </p>
+            <div class="hero-buttons">
+              <a
+                href="#"
+                class="btn btn-primary"
+                onclick="showSection('properties')"
+                >Yerlarni Ko'rish</a
+              >
+              <a
+                href="#"
+                class="btn btn-outline"
+                onclick="showAddPropertyForm()"
+                >Yer Qo'shish</a
+              >
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Properties -->
+      <div class="properties">
+        <div class="container">
+          <h2 class="section-title">Mavjud Yerlar</h2>
+          <div class="properties-grid" id="propertiesGrid">
+            <!-- Properties will be loaded here -->
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Properties Section -->
+    <section id="properties" class="page-section hidden">
+      <div class="properties">
+        <div class="container">
+          <h2 class="section-title">Barcha Yerlar</h2>
+          <div class="properties-grid" id="allPropertiesGrid">
+            <!-- All properties will be loaded here -->
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Investors Section -->
+    <section id="investors" class="page-section hidden">
+      <div class="properties">
+        <div class="container">
+          <h2 class="section-title">Investorlar Uchun</h2>
+          <p style="text-align: center; margin-bottom: 2rem; color: #666">
+            Investorlar sifatida siz barcha mavjud yerlarni ko'rishingiz va
+            ularning egalari bilan bog'lanishingiz mumkin.
+          </p>
+          <div class="properties-grid" id="investorPropertiesGrid">
+            <!-- Properties for investors will be loaded here -->
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Chat Section -->
+    <section id="chat" class="page-section hidden">
+      <div class="properties">
+        <div class="container">
+          <h2 class="section-title">Chat</h2>
+          <div class="chat-container">
+            <div class="chat-header">Umumiy Chat</div>
+            <div class="chat-messages" id="chatMessages">
+              <!-- Messages will appear here -->
+            </div>
+            <div class="chat-input">
+              <input
+                type="text"
+                id="messageInput"
+                placeholder="Xabar yozing..."
+                onkeypress="handleEnterKey(event)"
+              />
+              <button onclick="sendMessage()">Yuborish</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Login Modal -->
+    <div id="loginModal" class="modal">
+      <div class="modal-content">
+        <span class="close" onclick="closeModal('loginModal')">&times;</span>
+        <h2>Kirish</h2>
+        <form onsubmit="handleLogin(event)">
+          <div class="form-group">
+            <label for="loginEmail">Email yoki Telefon:</label>
+            <input type="text" id="loginEmail" required />
+          </div>
+          <div class="form-group">
+            <label for="loginPassword">Parol:</label>
+            <input type="password" id="loginPassword" required />
+          </div>
+          <button type="submit" class="btn btn-primary" style="width: 100%">
+            Kirish
+          </button>
+          <p style="text-align: center; margin-top: 1rem">
+            <a
+              href="#"
+              onclick="showModal('forgotPasswordModal'); closeModal('loginModal')"
+              >Parolni unutdingizmi?</a
+            >
+          </p>
+        </form>
+      </div>
+    </div>
+
+    <!-- Register Modal -->
+    <div id="registerModal" class="modal">
+      <div class="modal-content">
+        <span class="close" onclick="closeModal('registerModal')">&times;</span>
+        <h2>Ro'yxatdan o'tish</h2>
+        <form onsubmit="handleRegister(event)">
+          <div class="form-group">
+            <label for="registerName">To'liq ism:</label>
+            <input type="text" id="registerName" required />
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="registerEmail">Email:</label>
+              <input type="email" id="registerEmail" required />
+            </div>
+            <div class="form-group">
+              <label for="registerPhone">Telefon:</label>
+              <input type="tel" id="registerPhone" />
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="registerPassword">Parol:</label>
+              <input type="password" id="registerPassword" required />
+            </div>
+            <div class="form-group">
+              <label for="confirmPassword">Parolni tasdiqlang:</label>
+              <input type="password" id="confirmPassword" required />
+            </div>
+          </div>
+          <button type="submit" class="btn btn-primary" style="width: 100%">
+            Ro'yxatdan o'tish
+          </button>
+        </form>
+      </div>
+    </div>
+
+    <!-- Forgot Password Modal -->
+    <div id="forgotPasswordModal" class="modal">
+      <div class="modal-content">
+        <span class="close" onclick="closeModal('forgotPasswordModal')"
+          >&times;</span
+        >
+        <h2>Parolni tiklash</h2>
+        <form onsubmit="handleForgotPassword(event)">
+          <div class="form-group">
+            <label for="forgotEmail">Email:</label>
+            <input type="email" id="forgotEmail" required />
+          </div>
+          <button type="submit" class="btn btn-primary" style="width: 100%">
+            Tiklash havolasini yuborish
+          </button>
+        </form>
+      </div>
+    </div>
+
+    <!-- Add Property Modal -->
+    <div id="addPropertyModal" class="modal">
+      <div class="modal-content large">
+        <span class="close" onclick="closeModal('addPropertyModal')"
+          >&times;</span
+        >
+        <h2>Yangi Yer Qo'shish</h2>
+        <form onsubmit="handleAddProperty(event)">
+          <div class="form-group">
+            <label for="propertyTitle">Sarlavha:</label>
+            <input
+              type="text"
+              id="propertyTitle"
+              required
+              placeholder="Masalan: Toshkent shahrida yer"
+            />
+          </div>
+
+          <div class="form-group">
+            <label for="propertyAddress">Manzil:</label>
+            <input
+              type="text"
+              id="propertyAddress"
+              required
+              placeholder="To'liq manzilni kiriting"
+            />
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="propertyArea">Maydon (m²):</label>
+              <input
+                type="number"
+                id="propertyArea"
+                step="0.01"
+                placeholder="1000"
+              />
+            </div>
+            <div class="form-group">
+              <label for="propertyPrice">Narx ($):</label>
+              <input
+                type="number"
+                id="propertyPrice"
+                step="0.01"
+                placeholder="50000"
+              />
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="propertyDescription">Ta'rif:</label>
+            <textarea
+              id="propertyDescription"
+              rows="4"
+              placeholder="Yer haqida batafsil ma'lumot..."
+            ></textarea>
+          </div>
+
+          <div class="form-group">
+            <label>Rasm yuklash:</label>
+            <div class="file-upload">
+              <input
+                type="file"
+                id="propertyImageFile"
+                accept="image/*"
+                onchange="handleImageUpload(event)"
+              />
+              <label for="propertyImageFile" class="file-upload-label">
+                📷 Rasm tanlang yoki URL kiriting
+              </label>
+            </div>
+            <div class="form-group" style="margin-top: 0.5rem">
+              <input
+                type="url"
+                id="propertyImageUrl"
+                placeholder="Yoki rasm URL manzilini kiriting"
+              />
+            </div>
+            <div id="imagePreview" class="image-preview"></div>
+          </div>
+
+          <div class="contacts-section">
+            <h3>Aloqa Ma'lumotlari</h3>
+            <div id="contactInputs">
+              <div class="contact-input-group">
+                <select>
+                  <option value="phone">Telefon</option>
+                  <option value="email">Email</option>
+                  <option value="telegram">Telegram</option>
+                  <option value="instagram">Instagram</option>
+                </select>
+                <input type="text" placeholder="Aloqa ma'lumoti" />
+                <button
+                  type="button"
+                  class="remove-contact-btn"
+                  onclick="this.parentElement.remove()"
+                >
+                  ×
+                </button>
+              </div>
+            </div>
+            <button
+              type="button"
+              class="add-contact-btn"
+              onclick="addContactInput()"
+            >
+              + Aloqa qo'shish
+            </button>
+          </div>
+
+          <button
+            type="submit"
+            class="btn btn-primary"
+            style="width: 100%; margin-top: 1rem"
+          >
+            Yer Qo'shish
+          </button>
+        </form>
+      </div>
+    </div>
+
+    <!-- Contact Modal -->
+    <div id="contactModal" class="modal">
+      <div class="modal-content">
+        <span class="close" onclick="closeModal('contactModal')">&times;</span>
+        <h2>Aloqa Ma'lumotlari</h2>
+        <div id="contactList" class="contact-list">
+          <!-- Contacts will be loaded here -->
+        </div>
+      </div>
+    </div>
+
+    <!-- Property Detail Modal -->
+    <div id="propertyDetailModal" class="modal">
+      <div class="modal-content large">
+        <span class="close" onclick="closeModal('propertyDetailModal')"
+          >&times;</span
+        >
+        <div id="propertyDetailContent">
+          <!-- Property details will be loaded here -->
+        </div>
+      </div>
+    </div>
+
+    <script>
+      // Sample data
+      let users = [
+        {
+          id: 1,
+          name: "Admin User",
+          email: "admin@example.com",
+          phone: "+998901234567",
+          password: "admin123",
+          role: "admin",
+        },
+      ];
+
+      let properties = [
+        {
+          id: 1,
+          userId: 1,
+          title: "Toshkent shahrida yer",
+          address: "Toshkent, Chilonzor tumani",
+          area: 1000,
+          price: 50000,
+          description:
+            "Shahar markazida joylashgan, barcha kommunikatsiyalar mavjud. Biznes uchun juda qulay joy.",
+          imageUrl:
+            "https://images.unsplash.com/photo-1500382017468-9049fed747ef?w=400&h=200&fit=crop",
+          status: "active",
+          contacts: [
+            { type: "phone", value: "+998901234567" },
+            { type: "telegram", value: "@example_user" },
+            { type: "email", value: "contact@example.com" },
+          ],
+        },
+        {
+          id: 2,
+          userId: 1,
+          title: "Samarqandda yer",
+          address: "Samarqand, Registon yaqinida",
+          area: 1500,
+          price: 75000,
+          description:
+            "Tarixiy joylar yaqinida, turistik hudud. Mehmonxona yoki restoran uchun ideal.",
+          imageUrl:
+            "https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=400&h=200&fit=crop",
+          status: "active",
+          contacts: [
+            { type: "phone", value: "+998901234568" },
+            { type: "instagram", value: "@samarkand_land" },
+          ],
+        },
+        {
+          id: 3,
+          userId: 1,
+          title: "Buxoroda yer",
+          address: "Buxoro, shahar markazi",
+          area: 800,
+          price: 40000,
+          description:
+            "Kichik biznes uchun ideal joy. Barcha infratuzilma mavjud.",
+          imageUrl:
+            "https://images.unsplash.com/photo-1582407947304-fd86f028f716?w=400&h=200&fit=crop",
+          status: "active",
+          contacts: [
+            { type: "phone", value: "+998901234569" },
+            { type: "telegram", value: "@bukhara_invest" },
+          ],
+        },
+      ];
+
+      let chatMessages = [
+        {
+          id: 1,
+          senderId: 1,
+          senderName: "Admin",
+          message: "Assalomu alaykum! Platformaga xush kelibsiz!",
+          timestamp: new Date().toISOString(),
+        },
+      ];
+
+      let currentUser = null;
+
+      // Initialize the app
+      document.addEventListener("DOMContentLoaded", function () {
+        loadProperties();
+        loadChatMessages();
+        showSection("home");
+      });
+
+      // Alert function
+      function showAlert(message, type = "success") {
+        const alert = document.createElement("div");
+        alert.className = `alert ${type}`;
+        alert.textContent = message;
+        document.body.appendChild(alert);
+
+        setTimeout(() => {
+          alert.remove();
+        }, 3000);
+      }
+
+      // Navigation
+      function showSection(sectionName) {
+        const sections = document.querySelectorAll(".page-section");
+        sections.forEach((section) => section.classList.add("hidden"));
+
+        document.getElementById(sectionName).classList.remove("hidden");
+
+        if (sectionName === "properties") {
+          loadAllProperties();
+        } else if (sectionName === "investors") {
+          loadInvestorProperties();
+        } else if (sectionName === "chat") {
+          loadChatMessages();
+        }
+      }
+
+      function toggleMobileMenu() {
+        // Mobile menu implementation
+        showAlert("Mobile menu - keyingi versiyada qo'shiladi", "error");
+      }
+
+      // Modal functions
+      function showModal(modalId) {
+        document.getElementById(modalId).style.display = "block";
+        document.body.style.overflow = "hidden";
+      }
+
+      function closeModal(modalId) {
+        document.getElementById(modalId).style.display = "none";
+        document.body.style.overflow = "auto";
+      }
+
+      window.onclick = function (event) {
+        if (event.target.classList.contains("modal")) {
+          event.target.style.display = "none";
+          document.body.style.overflow = "auto";
+        }
+      };
+
+      // Authentication
+      function handleLogin(event) {
+        event.preventDefault();
+        const email = document.getElementById("loginEmail").value;
+        const password = document.getElementById("loginPassword").value;
+
+        const user = users.find(
+          (u) =>
+            (u.email === email || u.phone === email) && u.password === password
+        );
+
+        if (user) {
+          currentUser = user;
+          showAlert("Muvaffaqiyatli kirdingiz!");
+          closeModal("loginModal");
+          updateAuthButtons();
+        } else {
+          showAlert("Email yoki parol noto'g'ri!", "error");
+        }
+      }
+
+      function handleRegister(event) {
+        event.preventDefault();
+        const name = document.getElementById("registerName").value;
+        const email = document.getElementById("registerEmail").value;
+        const phone = document.getElementById("registerPhone").value;
+        const password = document.getElementById("registerPassword").value;
+        const confirmPassword =
+          document.getElementById("confirmPassword").value;
+
+        if (password !== confirmPassword) {
+          showAlert("Parollar mos kelmaydi!", "error");
+          return;
+        }
+
+        if (users.find((u) => u.email === email)) {
+          showAlert("Bu email allaqachon ro'yxatdan o'tgan!", "error");
+          return;
+        }
+
+        const newUser = {
+          id: users.length + 1,
+          name: name,
+          email: email,
+          phone: phone,
+          password: password,
+          role: "user",
+        };
+
+        users.push(newUser);
+        currentUser = newUser;
+
+        showAlert("Muvaffaqiyatli ro'yxatdan o'tdingiz!");
+        closeModal("registerModal");
+        updateAuthButtons();
+      }
+
+      function handleForgotPassword(event) {
+        event.preventDefault();
+        const email = document.getElementById("forgotEmail").value;
+
+        const user = users.find((u) => u.email === email);
+        if (user) {
+          showAlert("Parolni tiklash havolasi emailingizga yuborildi!");
+          closeModal("forgotPasswordModal");
+        } else {
+          showAlert("Bu email ro'yxatdan o'tmagan!", "error");
+        }
+      }
+
+      function updateAuthButtons() {
+        const authButtons = document.getElementById("authButtons");
+        if (currentUser) {
+          authButtons.innerHTML = `
+                    <span style="margin-right: 1rem;">Salom, ${currentUser.name}!</span>
+                    <a href="#" class="btn btn-outline" onclick="logout()">Chiqish</a>
+                `;
+        } else {
+          authButtons.innerHTML = `
+                    <a href="#" class="btn btn-outline" onclick="showModal('loginModal')">Kirish</a>
+                    <a href="#" class="btn btn-primary" onclick="showModal('registerModal')">Ro'yxatdan o'tish</a>
+                `;
+        }
+      }
+
+      function logout() {
+        currentUser = null;
+        updateAuthButtons();
+        showAlert("Tizimdan chiqdingiz!");
+      }
+
+      // Property functions
+      function loadProperties() {
+        const grid = document.getElementById("propertiesGrid");
+        grid.innerHTML = "";
+
+        properties.slice(0, 6).forEach((property) => {
+          grid.appendChild(createPropertyCard(property));
+        });
+      }
+
+      function loadAllProperties() {
+        const grid = document.getElementById("allPropertiesGrid");
+        grid.innerHTML = "";
+
+        properties.forEach((property) => {
+          grid.appendChild(createPropertyCard(property));
+        });
+      }
+
+      function loadInvestorProperties() {
+        const grid = document.getElementById("investorPropertiesGrid");
+        grid.innerHTML = "";
+
+        properties.forEach((property) => {
+          grid.appendChild(createPropertyCard(property));
+        });
+      }
+
+      function createPropertyCard(property) {
+        const card = document.createElement("div");
+        card.className = "property-card";
+        card.innerHTML = `
+                <div class="property-image">
+                    <img src="${property.imageUrl}" alt="${
+          property.title
+        }" onerror="this.src='https://images.unsplash.com/photo-1500382017468-9049fed747ef?w=400&h=200&fit=crop'">
+                    <div class="property-badge">${
+                      property.status === "active" ? "Mavjud" : "Sotilgan"
+                    }</div>
+                </div>
+                <div class="property-content">
+                    <h3 class="property-title">${property.title}</h3>
+                    <div class="property-details">
+                        <div class="property-detail">
+                            <span>📍</span>
+                            <span>${property.address}</span>
+                        </div>
+                        ${
+                          property.area
+                            ? `
+                        <div class="property-detail">
+                            <span>📐</span>
+                            <span>${property.area} m²</span>
+                        </div>
+                        `
+                            : ""
+                        }
+                    </div>
+                    ${
+                      property.price
+                        ? `<div class="property-price">$${property.price.toLocaleString()}</div>`
+                        : ""
+                    }
+                    <p class="property-description">${property.description}</p>
+                    <div class="property-actions">
+                        <button class="btn btn-primary btn-small" onclick="showPropertyDetail(${
+                          property.id
+                        })">Batafsil</button>
+                        <button class="btn btn-outline btn-small" onclick="showPropertyContacts(${
+                          property.id
+                        })">Aloqa</button>
+                    </div>
+                </div>
+            `;
+        return card;
+      }
+
+      function showPropertyDetail(propertyId) {
+        const property = properties.find((p) => p.id === propertyId);
+        if (!property) return;
+
+        const content = document.getElementById("propertyDetailContent");
+        content.innerHTML = `
+                <div style="text-align: center; margin-bottom: 2rem;">
+                    <img src="${property.imageUrl}" alt="${property.title}" 
+                         style="width: 100%; max-height: 300px; object-fit: cover; border-radius: 10px;"
+                         onerror="this.src='https://images.unsplash.com/photo-1500382017468-9049fed747ef?w=600&h=300&fit=crop'">
+                </div>
+                <h2>${property.title}</h2>
+                <div style="margin: 1rem 0;">
+                    <p><strong>📍 Manzil:</strong> ${property.address}</p>
+                    ${
+                      property.area
+                        ? `<p><strong>📐 Maydon:</strong> ${property.area} m²</p>`
+                        : ""
+                    }
+                    ${
+                      property.price
+                        ? `<p><strong>💰 Narx:</strong> $${property.price.toLocaleString()}</p>`
+                        : ""
+                    }
+                </div>
+                <div style="margin: 1rem 0;">
+                    <h3>Ta'rif:</h3>
+                    <p>${property.description}</p>
+                </div>
+                <div style="text-align: center; margin-top: 2rem;">
+                    <button class="btn btn-primary" onclick="showPropertyContacts(${
+                      property.id
+                    }); closeModal('propertyDetailModal')">
+                        Aloqa Ma'lumotlari
+                    </button>
+                </div>
+            `;
+        showModal("propertyDetailModal");
+      }
+
+      function showPropertyContacts(propertyId) {
+        const property = properties.find((p) => p.id === propertyId);
+        if (!property || !property.contacts) return;
+
+        const contactList = document.getElementById("contactList");
+        contactList.innerHTML = "";
+
+        property.contacts.forEach((contact) => {
+          const contactItem = document.createElement("div");
+          contactItem.className = "contact-item";
+          contactItem.onclick = () => handleContactClick(contact);
+
+          const iconClass = `contact-${contact.type}`;
+          const iconText =
+            contact.type === "phone"
+              ? "📞"
+              : contact.type === "email"
+              ? "📧"
+              : contact.type === "telegram"
+              ? "📱"
+              : "📷";
+
+          contactItem.innerHTML = `
+                    <div class="contact-icon ${iconClass}">${iconText}</div>
+                    <div>
+                        <div style="font-weight: bold; text-transform: capitalize;">${contact.type}</div>
+                        <div style="color: #666;">${contact.value}</div>
+                    </div>
+                `;
+
+          contactList.appendChild(contactItem);
+        });
+
+        showModal("contactModal");
+      }
+
+      function handleContactClick(contact) {
+        let url = "";
+        switch (contact.type) {
+          case "phone":
+            url = `tel:${contact.value}`;
+            break;
+          case "email":
+            url = `mailto:${contact.value}`;
+            break;
+          case "telegram":
+            url = `https://t.me/${contact.value.replace("@", "")}`;
+            break;
+          case "instagram":
+            url = `https://instagram.com/${contact.value.replace("@", "")}`;
+            break;
+        }
+        if (url) {
+          window.open(url, "_blank");
+        }
+      }
+
+      // Add property functions
+      function showAddPropertyForm() {
+        if (!currentUser) {
+          showAlert("Yer qo'shish uchun avval tizimga kiring!", "error");
+          showModal("loginModal");
+          return;
+        }
+        showModal("addPropertyModal");
+      }
+
+      function addContactInput() {
+        const contactInputs = document.getElementById("contactInputs");
+        const newInput = document.createElement("div");
+        newInput.className = "contact-input-group";
+        newInput.innerHTML = `
+                <select>
+                    <option value="phone">Telefon</option>
+                    <option value="email">Email</option>
+                    <option value="telegram">Telegram</option>
+                    <option value="instagram">Instagram</option>
+                </select>
+                <input type="text" placeholder="Aloqa ma'lumoti">
+                <button type="button" class="remove-contact-btn" onclick="this.parentElement.remove()">×</button>
+            `;
+        contactInputs.appendChild(newInput);
+      }
+
+      function handleImageUpload(event) {
+        const file = event.target.files[0];
+        if (file) {
+          const reader = new FileReader();
+          reader.onload = function (e) {
+            const preview = document.getElementById("imagePreview");
+            preview.innerHTML = `<img src="${e.target.result}" alt="Preview">`;
+          };
+          reader.readAsDataURL(file);
+        }
+      }
+
+      function handleAddProperty(event) {
+        event.preventDefault();
+
+        if (!currentUser) {
+          showAlert("Tizimga kiring!", "error");
+          return;
+        }
+
+        const title = document.getElementById("propertyTitle").value;
+        const address = document.getElementById("propertyAddress").value;
+        const area =
+          parseFloat(document.getElementById("propertyArea").value) || null;
+        const price =
+          parseFloat(document.getElementById("propertyPrice").value) || null;
+        const description = document.getElementById(
+          "propertyDescription"
+        ).value;
+
+        // Get image URL
+        let imageUrl = document.getElementById("propertyImageUrl").value;
+        const imageFile = document.getElementById("propertyImageFile").files[0];
+
+        if (imageFile) {
+          // In real app, upload to server
+          const reader = new FileReader();
+          reader.onload = function (e) {
+            imageUrl = e.target.result;
+            saveProperty();
+          };
+          reader.readAsDataURL(imageFile);
+        } else {
+          if (!imageUrl) {
+            imageUrl =
+              "https://images.unsplash.com/photo-1500382017468-9049fed747ef?w=400&h=200&fit=crop";
+          }
+          saveProperty();
+        }
+
+        function saveProperty() {
+          // Collect contacts
+          const contactInputGroups = document.querySelectorAll(
+            "#contactInputs .contact-input-group"
+          );
+          const contacts = [];
+          contactInputGroups.forEach((group) => {
+            const type = group.querySelector("select").value;
+            const value = group.querySelector("input").value.trim();
+            if (value) {
+              contacts.push({ type, value });
+            }
+          });
+
+          const newProperty = {
+            id: properties.length + 1,
+            userId: currentUser.id,
+            title,
+            address,
+            area,
+            price,
+            description,
+            imageUrl,
+            status: "active",
+            contacts,
+          };
+
+          properties.push(newProperty);
+
+          showAlert("Yer muvaffaqiyatli qo'shildi!");
+          closeModal("addPropertyModal");
+
+          // Reset form
+          document.querySelector("#addPropertyModal form").reset();
+          document.getElementById("contactInputs").innerHTML = `
+                    <div class="contact-input-group">
+                        <select>
+                            <option value="phone">Telefon</option>
+                            <option value="email">Email</option>
+                            <option value="telegram">Telegram</option>
+                            <option value="instagram">Instagram</option>
+                        </select>
+                        <input type="text" placeholder="Aloqa ma'lumoti">
+                        <button type="button" class="remove-contact-btn" onclick="this.parentElement.remove()">×</button>
+                    </div>
+                `;
+          document.getElementById("imagePreview").innerHTML = "";
+
+          // Reload properties
+          loadProperties();
+          loadAllProperties();
+          loadInvestorProperties();
+        }
+      }
+
+      // Chat functions
+      function loadChatMessages() {
+        const chatMessagesContainer = document.getElementById("chatMessages");
+        chatMessagesContainer.innerHTML = "";
+
+        chatMessages.forEach((message) => {
+          const messageElement = document.createElement("div");
+          messageElement.className = `message ${
+            message.senderId === (currentUser?.id || 0) ? "sent" : "received"
+          }`;
+          messageElement.innerHTML = `
+                    <div style="font-size: 0.8rem; opacity: 0.7; margin-bottom: 0.2rem;">
+                        ${message.senderName} - ${new Date(
+            message.timestamp
+          ).toLocaleTimeString()}
+                    </div>
+                    <div>${message.message}</div>
+                `;
+          chatMessagesContainer.appendChild(messageElement);
+        });
+
+        chatMessagesContainer.scrollTop = chatMessagesContainer.scrollHeight;
+      }
+
+      function sendMessage() {
+        if (!currentUser) {
+          showAlert("Chat uchun tizimga kiring!", "error");
+          return;
+        }
+
+        const messageInput = document.getElementById("messageInput");
+        const message = messageInput.value.trim();
+
+        if (!message) return;
+
+        const newMessage = {
+          id: chatMessages.length + 1,
+          senderId: currentUser.id,
+          senderName: currentUser.name,
+          message: message,
+          timestamp: new Date().toISOString(),
+        };
+
+        chatMessages.push(newMessage);
+        messageInput.value = "";
+
+        loadChatMessages();
+      }
+
+      function handleEnterKey(event) {
+        if (event.key === "Enter") {
+          sendMessage();
+        }
+      }
+    </script>
+  </body>
+</html>
